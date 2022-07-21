@@ -11,6 +11,14 @@ namespace RENDER {
         
     inline UINT MAX_VERTICES =  1024 * 4 * 3;
 
+    enum E_FONT_FLAGS : UINT {
+        FONT_CENTERED_X = 0x1,
+        FONT_CENTERED_Y = 0x2,
+        FONT_CENTERED = FONT_CENTERED_X | FONT_CENTERED_Y,
+        FONT_RIGHT_ALIGNED = 0x4,
+        FONT_OUTLINE = 0x8,
+    };
+
     namespace HELPER {
 
         // credits Microsoft DirectXTK

@@ -2,8 +2,8 @@
 
 #include "../../extra/helpers.h"
 
-RENDER::D3D11::stateBlock::~stateBlock()
-{
+RENDER::D3D11::stateBlock::~stateBlock() {
+
     m_context = nullptr;
 
 	RENDER::HELPER::safeRelease(m_vertexShader);
@@ -17,8 +17,8 @@ RENDER::D3D11::stateBlock::~stateBlock()
 	RENDER::HELPER::safeRelease(m_vsShaderBuffer);
 }
 
-void RENDER::D3D11::stateBlock::capture(ID3D11DeviceContext* context)
-{
+void RENDER::D3D11::stateBlock::capture(ID3D11DeviceContext* context) {
+
     // we should be storing the state of many other things but eh
 	m_context = context;
 
@@ -42,8 +42,11 @@ void RENDER::D3D11::stateBlock::capture(ID3D11DeviceContext* context)
 	m_context->RSGetState(&m_rasterizerState);
 }
 
-void RENDER::D3D11::stateBlock::apply()
-{
+void RENDER::D3D11::stateBlock::apply() {
+
+	if (m_context == nullptr)
+        return;
+
     auto scissorCount = (UINT)D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE;
     m_context->RSSetScissorRects(scissorCount, &m_scissorRect);
 
